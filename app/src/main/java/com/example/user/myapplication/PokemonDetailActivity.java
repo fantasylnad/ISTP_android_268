@@ -116,7 +116,12 @@ public class PokemonDetailActivity extends CustomizedActivity {
             return true;
         }
         else if(itemId == R.id.action_level_up) {
-
+            mPokemonInfo.level = mPokemonInfo.level+1;
+            levelText.setText(String.valueOf(mPokemonInfo.level));
+            Intent intent = new Intent();
+            intent.putExtra(PokemonInfo.nameKey, mPokemonInfo.name);
+            setResult(PokemonListActivity.levelup,intent);
+//            finish();
             return true;
         }
 

@@ -91,6 +91,8 @@ public class PokemonListActivity extends CustomizedActivity implements AdapterVi
 
     public final static int detailActivityRequestCode = 1;
     public final static int removeFromList = 1;
+    public final static int levelup = 2;
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -112,8 +114,16 @@ public class PokemonListActivity extends CustomizedActivity implements AdapterVi
                     adapter.remove(pokemonInfo);
                     Toast.makeText(this, pokemonInfo.name + "已被存入電腦", Toast.LENGTH_LONG).show();
                 }
+            } else if(resultCode == levelup){
+                String pokemonName = data.getStringExtra(PokemonInfo.nameKey);
+                PokemonInfo pokemonInfo = adapter.getItemWithName(pokemonName);
+                if(pokemonInfo != null) {
+                    adapter.update(pokemonInfo);
+                    Toast.makeText(this, pokemonInfo.name + "已升級", Toast.LENGTH_LONG).show();
+                }
             }
         }
+
 
 
     }
