@@ -10,6 +10,8 @@ public class PokemonInfo implements Parcelable {
 
     public final static String parcelKey = "PokemonInfo.parcel";
     public final static String nameKey = "PokemonInfo.name";
+    public final static String levelKey = "PokemonInfo.level";
+
 
     public final static int numCurrentSkills = 4;
     public static String[] typeNames;

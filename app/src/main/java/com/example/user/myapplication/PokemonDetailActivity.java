@@ -3,14 +3,13 @@ package com.example.user.myapplication;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.user.myapplication.model.PokemonInfo;
 import com.squareup.picasso.Picasso;
@@ -118,9 +117,11 @@ public class PokemonDetailActivity extends CustomizedActivity {
         else if(itemId == R.id.action_level_up) {
             mPokemonInfo.level = mPokemonInfo.level+1;
             levelText.setText(String.valueOf(mPokemonInfo.level));
+            Toast.makeText(this, mPokemonInfo.name + "已升級", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
+            intent.putExtra(PokemonInfo.levelKey, mPokemonInfo.level);
             intent.putExtra(PokemonInfo.nameKey, mPokemonInfo.name);
-            setResult(PokemonListActivity.levelup,intent);
+            setResult(PokemonListActivity.levelUp,intent);
 //            finish();
             return true;
         }

@@ -4,14 +4,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -91,7 +88,7 @@ public class PokemonListActivity extends CustomizedActivity implements AdapterVi
 
     public final static int detailActivityRequestCode = 1;
     public final static int removeFromList = 1;
-    public final static int levelup = 2;
+    public final static int levelUp = 2;
 
 
     @Override
@@ -106,6 +103,7 @@ public class PokemonListActivity extends CustomizedActivity implements AdapterVi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Toast.makeText(this, "Updating...", Toast.LENGTH_SHORT).show();
         if(requestCode == detailActivityRequestCode) {
             if(resultCode == removeFromList) {
                 String pokemonName = data.getStringExtra(PokemonInfo.nameKey);
@@ -114,12 +112,13 @@ public class PokemonListActivity extends CustomizedActivity implements AdapterVi
                     adapter.remove(pokemonInfo);
                     Toast.makeText(this, pokemonInfo.name + "已被存入電腦", Toast.LENGTH_LONG).show();
                 }
-            } else if(resultCode == levelup){
+            } else if(resultCode == levelUp){
                 String pokemonName = data.getStringExtra(PokemonInfo.nameKey);
                 PokemonInfo pokemonInfo = adapter.getItemWithName(pokemonName);
+                int pokemonLevel = data.getIntExtra(PokemonInfo.levelKey,pokemonInfo.level);
+                pokemonInfo.level = pokemonLevel;
                 if(pokemonInfo != null) {
                     adapter.update(pokemonInfo);
-                    Toast.makeText(this, pokemonInfo.name + "已升級", Toast.LENGTH_LONG).show();
                 }
             }
         }
